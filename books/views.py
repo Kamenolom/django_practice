@@ -12,7 +12,6 @@ def book_list(request):
     return render(request,
                   'books/book_list.html',
                   {'books': books,
-                   'categories':categories,
+                   'categories': categories,
                    }
                   )
-
