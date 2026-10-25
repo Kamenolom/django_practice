@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Книжный магазин</title>
+</head>
+<body>
+    <h1>Книжный магазин</h1>
+
+    <h2>Категории</h2>
+    {% for category in categories %}
+        <p>
+            {{ category.name }} — книг: {{ category.book_count }}
+        </p>
+    {% empty %}
+        <p>Категорий пока нет.</p>
+    {% endfor %}
+
+    <hr>
+
+    <h2>Поиск книг</h2>
+    <form method="get">
+        <input
+            type="text"
+            name="q"
+            placeholder="Название книги или автор"
+            value="{{ request.GET.q|default:'' }}"
+        >
+        <button type="submit">Найти</button>
+    </form>
+
+    <hr>
+
+    <h2>Книги в наличии</h2>
+    {% for book in books %}
+        <article>
+            <h3>{{ book.title }}</h3>
+            <p>Автор: {{ book.author }}</p>
+            <p>Цена: {{ book.price }} €</p>
+            <p>В наличии: {{ book.stock }}</p>
+            <p>Категория: {{ book.category.name }}</p>
+        </article>
+        <hr>
+    {% empty %}
+        <p>Книги не найдены.</p>
+    {% endfor %}
+</body>
+</html>
